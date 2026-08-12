@@ -31,6 +31,12 @@ npm run build
 npm run preview
 ```
 
+## GitHub Pages
+
+After enabling **Settings → Pages → Source: GitHub Actions**, the workflow deploys on every push to `main`:
+
+https://kwtsang101016.github.io/major-matching-2026/
+
 ## Stack
 
 React + TypeScript + Vite
