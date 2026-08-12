@@ -33,7 +33,11 @@ npm run preview
 
 ## GitHub Pages
 
-After enabling **Settings → Pages → Source: GitHub Actions**, the workflow deploys on every push to `main`:
+1. Open [Settings → Pages](https://github.com/kwtsang101016/major-matching-2026/settings/pages)
+2. Under **Build and deployment → Source**, choose **Deploy from a branch**
+3. Branch: **gh-pages** / **/ (root)** → Save
+
+After the next successful Actions run (or a re-run), the site is at:
 
 https://kwtsang101016.github.io/major-matching-2026/
 
