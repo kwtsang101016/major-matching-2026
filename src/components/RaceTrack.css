@@ -1,0 +1,80 @@
+.race {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.race__lane {
+  display: grid;
+  grid-template-columns: 88px 1fr 48px;
+  gap: 12px;
+  align-items: center;
+}
+
+.race__label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.race__label strong {
+  font-size: 16px;
+}
+
+.race__track {
+  position: relative;
+  height: 64px;
+}
+
+.race--compact .race__track {
+  height: 48px;
+}
+
+.race__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 10px;
+  margin-top: -5px;
+  border: 2px solid var(--ink);
+  background: #dfd4b5;
+  overflow: hidden;
+}
+
+.race__bar i {
+  display: block;
+  height: 100%;
+  transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.race__runner {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  transition: left 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(3px 3px 0 #16213c33);
+}
+
+.race__score {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: right;
+}
+
+@media (width <= 640px) {
+  .race__lane {
+    grid-template-columns: 64px 1fr 36px;
+  }
+
+  .race__label span {
+    display: none;
+  }
+}
