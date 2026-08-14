@@ -9,11 +9,12 @@ Interactive guide for Year‑1 School of Data Science students choosing among:
 ## Flow
 
 1. Shared School Package  
-2. Placement reminder (“study well > hot major”)  
-3. 8-question experience race (3 robot meters)  
-4. Required-course comparison  
-5. Graduation framework  
-6. Summary  
+2. Brief introductions to CS / DS / STA in the AI era  
+3. Placement reminder (“study well > hot major”)  
+4. 8-question experience race (3 robot meters)  
+5. Required-course comparison  
+6. Elective rules and streams  
+7. Summary  
 
 ## Run locally
 

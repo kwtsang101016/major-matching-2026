@@ -280,45 +280,177 @@ export const REQUIRED_BY_MAJOR: Record<
   },
 };
 
-/** Soft titles for CS courses we don't have exact English titles from course list extract */
+export interface MajorIntro {
+  tagline: string;
+  bullets: string[];
+}
+
+export const MAJOR_INTROS: Record<MajorId, MajorIntro> = {
+  cs: {
+    tagline: "Build the systems that make AI run.",
+    bullets: [
+      "Computer Science trains you to design algorithms, software, and computer systems — from data structures and operating systems to how programs actually execute.",
+      "In the AI era, models still need people who can implement, scale, debug, and ship them: compilers, databases, operating systems, and large-scale software.",
+      "If you enjoy making things run reliably — not only using AI tools — CS is the spine for building the infrastructure behind intelligent applications.",
+      "AI is one application of CS, not a replacement for it. Foundations in algorithms and systems stay useful as models change.",
+    ],
+  },
+  ds: {
+    tagline: "Turn data into predictions and decisions.",
+    bullets: [
+      "Data Science sits between computing and statistics: you learn to collect, model, and deploy data workflows for prediction and decision-making.",
+      "In the AI era, DS is the applied path — machine learning, simulation, optimization, and domain data (finance, operations, life science) without a full CS systems stack.",
+      "You practice connecting models to messy real problems: pipelines, evaluation, and using ML where it actually helps.",
+      "If you want to work with AI as a data product — rather than only proving theorems or only writing systems code — DS is designed for that middle ground.",
+    ],
+  },
+  sta: {
+    tagline: "Choose a way of thinking that stays valid as tools change.",
+    bullets: [
+      "Statistics trains you to make reliable inferences from limited, noisy data; to quantify uncertainty; and to distinguish correlation from causation.",
+      "Tools and models will keep iterating. Probability, inference, and experimental design do not go out of date.",
+      "It leads to biostatistics, financial risk, and research, and it also gives a solid foundation for data science and AI.",
+      "In an era when AI can answer quickly, statistics helps you ask whether the answer is trustworthy, where bias comes from, and whether a conclusion can survive scrutiny.",
+    ],
+  },
+};
+
+export interface StreamInfo {
+  name: string;
+  examples: string[];
+}
+
 export const FRAMEWORK: Record<
   MajorId,
   {
-    total: number;
-    school: number;
-    required: number;
-    electives: number;
     electivesRule: string;
-    streams: string;
+    streamRule: string;
+    streams: StreamInfo[];
   }
 > = {
   cs: {
-    total: 70,
-    school: 23,
-    required: 20,
-    electives: 27,
     electivesRule:
-      "≥18 units from CS-heavy Group (a); remaining ≤9 units from (a) or broader Group (b).",
-    streams: "Optional Artificial Intelligence stream (≥4 courses from a short list).",
+      "27 units from two groups: at least 18 from Group (a) (core CS electives such as databases, AI, NLP, software engineering, deep learning). The remaining units may come from Group (a) or a broader Group (b) (ECE, math, stats, biology, finance, etc.).",
+    streamRule:
+      "Optional Artificial Intelligence Stream: take at least 4 courses from the AI list. You may also graduate with no declared stream.",
+    streams: [
+      {
+        name: "Artificial Intelligence Stream",
+        examples: [
+          "CSC3180 Fundamentals of Artificial Intelligence",
+          "CSC3160 Fundamentals of Speech and Language Processing",
+          "CSC4100 Natural Language Processing",
+          "DDA4220 Deep Learning and Applications",
+          "DDA4230 Reinforcement Learning",
+          "CSC4801 AI-assisted Software Engineering",
+        ],
+      },
+    ],
   },
   ds: {
-    total: 71,
-    school: 23,
-    required: 18,
-    electives: 30,
     electivesRule:
-      "Any 30 units from five domain streams; at most two courses below 3000-level.",
-    streams:
-      "Optional declaration of one stream (≥4 courses): Theory, Finance & Econ, Ops, Life Science, Computing.",
+      "Any 30 units chosen from the five streams below. At most two courses may be below 3000-level. Streams can be mixed unless you declare one.",
+    streamRule:
+      "Optional: declare exactly one stream by completing at least 4 courses in it. You may also declare none.",
+    streams: [
+      {
+        name: "Methodology and Theory Stream",
+        examples: [
+          "DDA4210 Advanced Machine Learning",
+          "DDA4250 Mathematical Introduction to Deep Learning",
+          "STA3020 Statistical Inference",
+          "MAT2050 Mathematical Analysis",
+        ],
+      },
+      {
+        name: "Finance and Economics Stream",
+        examples: [
+          "FMA4200 Financial Data Analysis",
+          "FIN3080 Investment Analysis and Portfolio Management",
+          "STA4003 Time Series",
+          "ECO3121 Introductory Econometrics",
+        ],
+      },
+      {
+        name: "Operations Management Stream",
+        examples: [
+          "DMS2030 Operations Management",
+          "DMS4031 Supply Chain and Logistics",
+          "MKT4220 Big Data Marketing",
+          "DDA4260 Networked Life",
+        ],
+      },
+      {
+        name: "Life Science Stream",
+        examples: [
+          "BIM3001 Bioinformatics",
+          "BIM2005 Computational Biology",
+          "STA4012 Statistical Genetics and Genomics",
+          "BIO3204 Genetic Engineering",
+        ],
+      },
+      {
+        name: "Computing Stream",
+        examples: [
+          "CSC3170 Database System",
+          "CSC3150 Operating System",
+          "CSC4100 Natural Language Processing",
+          "DDA4220 Deep Learning and Applications",
+        ],
+      },
+    ],
   },
   sta: {
-    total: 71,
-    school: 23,
-    required: 18,
-    electives: 30,
     electivesRule:
-      "30 units from streams / CE; ALL students must complete depth of 3 courses in one stream.",
-    streams:
-      "Optional declaration of one stream (≥4): Math Stats, Methodology, Biostat, Finance, Computing & ML.",
+      "30 units from the streams (and complementary electives). Every student must complete a depth requirement: 3 courses from any one stream. Complementary electives include extra CS, DS, finance, and STA courses.",
+    streamRule:
+      "Optional: declare exactly one stream by completing at least 4 courses in it. Depth (3 in one stream) is required even if you declare none.",
+    streams: [
+      {
+        name: "Mathematical Statistics Stream",
+        examples: [
+          "STA4001 / 4001H Stochastic Processes",
+          "STA4100 Statistical Inference II",
+          "MAT3280 Probability Theory",
+          "DDA4002 Stochastic Simulation",
+        ],
+      },
+      {
+        name: "Statistical Methodology Stream",
+        examples: [
+          "STA3006 Design and Analysis of Experiments",
+          "DDA4010 Bayesian Statistics",
+          "STA4003 Time Series",
+          "STA4041 Causal Inference",
+        ],
+      },
+      {
+        name: "Biostatistics & Bioinformatics Stream",
+        examples: [
+          "STA4012 Statistical Genetics and Genomics",
+          "BIM3001 Bioinformatics",
+          "BIM2005 Computational Biology",
+          "STA4005 Survival Modelling",
+        ],
+      },
+      {
+        name: "Financial Statistics Stream",
+        examples: [
+          "STA4020 Statistical Modelling in Financial Markets",
+          "FIN3380 Financial Data Analysis with AI Tools",
+          "RMS4001 Simulation Methods for Risk Management and Finance",
+          "STA4003 Time Series",
+        ],
+      },
+      {
+        name: "Computing & Machine Learning Stream",
+        examples: [
+          "DDA3020 / 3020H Machine Learning",
+          "CSC3100 Data Structures",
+          "CSC4120 Design and Analysis of Algorithms",
+          "DDA4220 Deep Learning and Applications",
+        ],
+      },
+    ],
   },
 };

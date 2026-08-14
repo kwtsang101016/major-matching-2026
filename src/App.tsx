@@ -1,5 +1,6 @@
 import {
   FRAMEWORK,
+  MAJOR_INTROS,
   MAJOR_META,
   QUESTIONS,
   REQUIRED_BY_MAJOR,
@@ -16,6 +17,7 @@ import { useMemo, useState } from "react";
 type Stage =
   | "hero"
   | "school"
+  | "intros"
   | "placements"
   | "quiz"
   | "result"
@@ -26,6 +28,7 @@ type Stage =
 const STAGE_ORDER: Stage[] = [
   "hero",
   "school",
+  "intros",
   "placements",
   "quiz",
   "result",
@@ -157,6 +160,44 @@ export default function App() {
             <button type="button" className="secondary" onClick={() => go("hero")}>
               Back
             </button>
+            <button type="button" className="primary" onClick={() => go("intros")}>
+              Next <span>→</span>
+            </button>
+          </div>
+        </section>
+      )}
+
+      {stage === "intros" && (
+        <section className="slide">
+          <p className="kicker">02 · What each major is</p>
+          <h2>CS, Data Science, and Statistics in the AI era</h2>
+          <p className="sectionLead">
+            Year‑1 students often hear the names before they know the jobs each major trains.
+            Use these sketches as a map — then keep studying, whatever you choose.
+          </p>
+          <div className="introGrid">
+            {MAJORS.map((id) => (
+              <article key={id} style={{ borderTopColor: MAJOR_META[id].color }}>
+                <header>
+                  <Robot major={id} size={52} />
+                  <div>
+                    <strong style={{ color: MAJOR_META[id].color }}>{MAJOR_META[id].short}</strong>
+                    <span>{MAJOR_META[id].full}</span>
+                  </div>
+                </header>
+                <p className="introTagline">{MAJOR_INTROS[id].tagline}</p>
+                <ul>
+                  {MAJOR_INTROS[id].bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+          <div className="slideActions">
+            <button type="button" className="secondary" onClick={() => go("school")}>
+              Back
+            </button>
             <button type="button" className="primary" onClick={() => go("placements")}>
               Next <span>→</span>
             </button>
@@ -166,7 +207,7 @@ export default function App() {
 
       {stage === "placements" && (
         <section className="slide slide--dark">
-          <p className="kicker kicker--paper">02 · Before you race</p>
+          <p className="kicker kicker--paper">03 · Before you race</p>
           <h2>All three majors can lead to strong outcomes</h2>
           <p className="sectionLead sectionLead--light">
             CS, Data Science, and Statistics graduates from our school find good further-study
@@ -180,7 +221,7 @@ export default function App() {
             </p>
           </div>
           <div className="slideActions">
-            <button type="button" className="secondary" onClick={() => go("school")}>
+            <button type="button" className="secondary" onClick={() => go("intros")}>
               Back
             </button>
             <button type="button" className="primary" onClick={restartQuiz}>
@@ -265,7 +306,7 @@ export default function App() {
 
       {stage === "required" && (
         <section className="slide">
-          <p className="kicker">04 · Required spines</p>
+          <p className="kicker">05 · Required spines</p>
           <h2>Which set of courses would you like to take in the coming years?</h2>
           <p className="sectionLead">
             Ignore marketing names for a moment. These are the major-required courses you would
@@ -305,67 +346,31 @@ export default function App() {
 
       {stage === "framework" && (
         <section className="slide slide--paper">
-          <p className="kicker">05 · Structure</p>
+          <p className="kicker">06 · Structure</p>
           <h2>How graduation requirements differ</h2>
-          <p className="sectionLead">
-            Framework only — not full elective catalogues. Elective lists are long; the structure
-            is what changes your day-to-day load.
-          </p>
-          <div className="frameworkTableWrap">
-            <table className="frameworkTable">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  {MAJORS.map((id) => (
-                    <th key={id} style={{ color: MAJOR_META[id].color }}>
-                      {MAJOR_META[id].short}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Total major units</td>
-                  {MAJORS.map((id) => (
-                    <td key={id}>{FRAMEWORK[id].total}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>School Package</td>
-                  {MAJORS.map((id) => (
-                    <td key={id}>{FRAMEWORK[id].school}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Major Required</td>
-                  {MAJORS.map((id) => (
-                    <td key={id}>{FRAMEWORK[id].required}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Electives</td>
-                  {MAJORS.map((id) => (
-                    <td key={id}>{FRAMEWORK[id].electives}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Elective rule</td>
-                  {MAJORS.map((id) => (
-                    <td key={id} className="frameworkTable__text">
-                      {FRAMEWORK[id].electivesRule}
-                    </td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>Streams</td>
-                  {MAJORS.map((id) => (
-                    <td key={id} className="frameworkTable__text">
-                      {FRAMEWORK[id].streams}
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+          <div className="frameworkGrid">
+            {MAJORS.map((id) => (
+              <article key={id} style={{ borderTopColor: MAJOR_META[id].color }}>
+                <header>
+                  <Robot major={id} size={48} />
+                  <strong style={{ color: MAJOR_META[id].color }}>{MAJOR_META[id].short}</strong>
+                </header>
+                <h3>Elective rule</h3>
+                <p>{FRAMEWORK[id].electivesRule}</p>
+                <h3>Streams</h3>
+                <p>{FRAMEWORK[id].streamRule}</p>
+                {FRAMEWORK[id].streams.map((stream) => (
+                  <div key={stream.name} className="streamBlock">
+                    <strong>{stream.name}</strong>
+                    <ul>
+                      {stream.examples.map((course) => (
+                        <li key={course}>{course}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </article>
+            ))}
           </div>
           <div className="slideActions">
             <button type="button" className="secondary" onClick={() => go("required")}>
@@ -380,7 +385,7 @@ export default function App() {
 
       {stage === "summary" && (
         <section className="slide">
-          <p className="kicker">06 · Summary</p>
+          <p className="kicker">07 · Summary</p>
           <h2>Choose the spine you can sustain</h2>
           <div className="summaryGrid">
             <article>
