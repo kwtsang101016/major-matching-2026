@@ -19,10 +19,7 @@ export function CoverScene(): ReactElement {
           <span className={styles.pill}>Computing</span>
           <span className={styles.pill}>Real-world decisions</span>
         </div>
-        <p className={styles.hint}>
-          Use ← → or the buttons above. This is a guide for self-understanding — not a contest
-          between majors.
-        </p>
+        <p className={styles.hint}>Use ← → or the buttons above.</p>
       </div>
     </section>
   );
