@@ -15,7 +15,7 @@ export function RaceTrack({ scores, compact = false }: RaceTrackProps) {
   const maxNorm = Math.max(norm.cs, norm.ds, norm.sta, 0.01);
 
   return (
-    <div className={`race ${compact ? "race--compact" : ""}`} aria-label="Score race">
+    <div className={`race ${compact ? "race--compact" : ""}`} aria-label="Experience signals by major">
       {ORDER.map((id) => {
         const pct = Math.round((norm[id] / maxNorm) * 100);
         const raw = scores[id];

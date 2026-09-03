@@ -1,20 +1,23 @@
-# Major Match 2026
+# Studying at SDS: What and Why
 
-Interactive guide for Year‑1 School of Data Science students choosing among:
+Interactive lecture for Year‑1 School of Data Science students choosing among:
 
-- **CS** — Computer Science and Engineering  
-- **DS** — Data Science and Big Data Technology  
-- **STA** — Statistics  
+- **CS** — Computer Science and Engineering
+- **DS** — Data Science and Big Data Technology
+- **STA** — Statistics
 
 ## Flow
 
-1. Shared School Package  
-2. Brief introductions to CS / DS / STA in the AI era  
-3. Placement reminder (“study well > hot major”)  
-4. 8-question experience race (3 robot meters)  
-5. Required-course comparison  
-6. Elective rules and streams  
-7. Summary  
+1. What data science is, and why the SDS curriculum is built this way
+2. Shared School Package
+3. Brief introductions to CS / DS / STA in the AI era
+4. Placement reminder (“study well > hot major”)
+5. 8-question self-check (interest, Year‑1 evidence, sustainable load)
+6. Required-course comparison
+7. Elective rules and streams
+8. Summary
+
+Use ← → or Prev / Next to move through the slides.
 
 ## Run locally
 

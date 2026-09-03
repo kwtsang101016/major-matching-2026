@@ -136,5 +136,5 @@ export function interpretFit(raw: ScoreTriple): FitResult {
       advice: `${base.advice} Runner-up: ${MAJOR_META[runnerUp].full}.`,
     };
   }
-  return { ...base, summary: `${base.summary} Leading fit: ${name}.` };
+  return { ...base, summary: `${base.summary} Your answers so far sit closest to ${name}.` };
 }

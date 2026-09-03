@@ -12,6 +12,7 @@ export interface Choice {
 export interface Question {
   id: string;
   prompt: string;
+  section: "Interest" | "Year-1 evidence" | "Sustainable load";
   choices: Choice[];
 }
 
@@ -41,179 +42,184 @@ export const MAJOR_META: Record<
 
 export const QUESTIONS: Question[] = [
   {
-    id: "contests",
-    prompt:
-      "Have you taken part in programming contests (e.g. school contests, OI/ICPC-style, Codeforces)?",
+    id: "own-the-work",
+    section: "Interest",
+    prompt: "When a problem is interesting, which part do you most want to own?",
     choices: [
       {
         id: "a",
-        label: "Yes — and I got a strong result",
-        detail: "Medal, high rank, or I felt competitive.",
+        label: "Making it run reliably as software or a system",
         scores: { cs: 4, ds: 1, sta: 0 },
       },
       {
         id: "b",
-        label: "Yes — I participated, but results were average",
-        detail: "Or I did not enjoy contest-style coding much.",
-        scores: { cs: 1, ds: 2, sta: 1 },
+        label: "Turning messy data into a model that predicts or decides well",
+        scores: { cs: 1, ds: 4, sta: 1 },
       },
       {
         id: "c",
-        label: "No — I never tried, or I disliked it",
-        detail: "Contest coding is not part of my story so far.",
-        scores: { cs: 0, ds: 2, sta: 2 },
+        label: "Checking whether a claim is justified, and with what uncertainty",
+        scores: { cs: 0, ds: 2, sta: 4 },
       },
     ],
   },
   {
-    id: "csc-courses",
-    prompt:
-      "Thinking about CSC1001 or CSC1003 and CSC1002 or CSC1004, which is closest to your experience?",
+    id: "kind-of-question",
+    section: "Interest",
+    prompt: "Which kind of question do you most enjoy sitting with?",
     choices: [
       {
         id: "a",
-        label: "Strong grade — and I genuinely enjoyed the courses",
-        scores: { cs: 4, ds: 2, sta: 0 },
+        label: "How can we build this efficiently and correctly?",
+        scores: { cs: 4, ds: 1, sta: 0 },
       },
       {
         id: "b",
-        label: "Grade was fine, but it felt like work",
-        detail: "Not something I necessarily want more of.",
-        scores: { cs: 1, ds: 3, sta: 2 },
+        label: "How can we get a useful pattern from this data?",
+        scores: { cs: 1, ds: 4, sta: 1 },
       },
       {
         id: "c",
-        label: "I struggled, or finished but did not like the labs",
-        scores: { cs: 0, ds: 2, sta: 3 },
+        label: "Is this pattern real, or could it be noise, bias, or a weak design?",
+        scores: { cs: 0, ds: 2, sta: 4 },
       },
     ],
   },
   {
-    id: "y1-natural",
-    prompt: "Which kind of Year-1 work felt most natural to you?",
+    id: "group-role",
+    section: "Interest",
+    prompt: "In a group project, which role feels most like you?",
     choices: [
       {
         id: "a",
-        label: "Writing and debugging programs; making something run",
+        label: "Design the structure, write the core code, and debug until it ships",
+        scores: { cs: 4, ds: 1, sta: 0 },
+      },
+      {
+        id: "b",
+        label: "Clean the data, try models, and compare what actually works",
+        scores: { cs: 1, ds: 4, sta: 1 },
+      },
+      {
+        id: "c",
+        label: "State assumptions, choose the method, and explain how sure we should be",
+        scores: { cs: 0, ds: 2, sta: 4 },
+      },
+    ],
+  },
+  {
+    id: "y1-enjoyment",
+    section: "Year-1 evidence",
+    prompt: "So far this year, which kind of work have you found most enjoyable?",
+    choices: [
+      {
+        id: "a",
+        label: "Programming courses and labs (CSC1001/1003, CSC1002/1004)",
         scores: { cs: 4, ds: 2, sta: 0 },
       },
       {
         id: "b",
-        label: "Working with data / DDA-style projects",
-        detail: "Trying models or analysis workflows.",
+        label: "Data-oriented work (DDA2001, projects, trying models or analysis)",
         scores: { cs: 1, ds: 4, sta: 2 },
       },
       {
         id: "c",
-        label: "Calculus / linear algebra / careful mathematical reasoning",
+        label: "Mathematics (calculus, linear algebra) or careful step-by-step argument",
         scores: { cs: 0, ds: 2, sta: 4 },
       },
     ],
   },
   {
-    id: "math-background",
-    prompt: "How would you describe your past experience with mathematics?",
+    id: "programming-experience",
+    section: "Year-1 evidence",
+    prompt: "Which is closest to your experience with programming so far?",
     choices: [
       {
         id: "a",
-        label: "Strong contest math, or math usually feels easy and interesting",
-        scores: { cs: 1, ds: 2, sta: 4 },
-      },
-      {
-        id: "b",
-        label: "Solid school math with effort — not “math-contest” oriented",
-        scores: { cs: 2, ds: 3, sta: 2 },
-      },
-      {
-        id: "c",
-        label: "Math is often hard or unenjoyable, even when I pass",
-        scores: { cs: 3, ds: 2, sta: 0 },
-      },
-    ],
-  },
-  {
-    id: "past-task",
-    prompt:
-      "Looking back (school, contests, projects, or Year-1 work), which task type did you prefer?",
-    choices: [
-      {
-        id: "a",
-        label: "Build a tool / program that others can use",
-        scores: { cs: 4, ds: 2, sta: 0 },
-      },
-      {
-        id: "b",
-        label: "Get predictions / patterns to work well on new data",
-        scores: { cs: 1, ds: 4, sta: 1 },
-      },
-      {
-        id: "c",
-        label: "Check whether a claim is justified — and how uncertain we should be",
-        scores: { cs: 0, ds: 2, sta: 4 },
-      },
-    ],
-  },
-  {
-    id: "when-stuck",
-    prompt: "When you get stuck on a hard problem, what do you usually do first?",
-    choices: [
-      {
-        id: "a",
-        label: "Search docs / examples, refactor, keep debugging until it runs",
-        scores: { cs: 4, ds: 2, sta: 0 },
-      },
-      {
-        id: "b",
-        label: "Try another approach / feature / experiment and compare outcomes",
-        scores: { cs: 1, ds: 4, sta: 1 },
-      },
-      {
-        id: "c",
-        label: "Go back to definitions, assumptions, and step-by-step reasoning",
-        scores: { cs: 0, ds: 2, sta: 4 },
-      },
-    ],
-  },
-  {
-    id: "extra-course",
-    prompt: "If you could add one extra type of course next year, which would you choose?",
-    choices: [
-      {
-        id: "a",
-        label: "More programming / algorithms / systems-style CS courses",
+        label:
+          "I enjoy it enough that I would take more systems / algorithms courses even if they are hard",
         scores: { cs: 4, ds: 1, sta: 0 },
       },
       {
         id: "b",
-        label: "More machine learning / data pipelines / applied analytics",
-        scores: { cs: 1, ds: 4, sta: 1 },
-      },
-      {
-        id: "c",
-        label: "More probability / inference / careful mathematical statistics",
-        scores: { cs: 0, ds: 2, sta: 4 },
-      },
-    ],
-  },
-  {
-    id: "hype-check",
-    prompt:
-      "Many students choose CS because AI / software sounds hot. Which is closest to you?",
-    choices: [
-      {
-        id: "a",
-        label: "I already have evidence I do well at serious coding",
-        detail: "Contests and/or strong enjoyment of CSC courses.",
-        scores: { cs: 4, ds: 1, sta: 0 },
-      },
-      {
-        id: "b",
-        label: "I like data / ML ideas, but I am unsure about a full CS systems load",
+        label: "I can program when a project needs it, but I do not want programming to be the whole major",
         scores: { cs: 1, ds: 4, sta: 2 },
       },
       {
         id: "c",
-        label: "I am more drawn to math / reasoning; coding is a tool, not my identity",
+        label: "Programming is a tool I will use; the reasoning is what I care about",
+        scores: { cs: 0, ds: 2, sta: 4 },
+      },
+    ],
+  },
+  {
+    id: "math-experience",
+    section: "Year-1 evidence",
+    prompt: "Which is closest to your experience with mathematics so far?",
+    choices: [
+      {
+        id: "a",
+        label: "I can get through required math, but I do not want a proof-heavy spine",
+        scores: { cs: 4, ds: 2, sta: 0 },
+      },
+      {
+        id: "b",
+        label:
+          "I am comfortable with math as a language for models, especially when it stays tied to applications",
+        scores: { cs: 1, ds: 4, sta: 2 },
+      },
+      {
+        id: "c",
+        label: "I usually find abstract math and careful argument natural, even when the work takes a long time",
+        scores: { cs: 0, ds: 2, sta: 4 },
+      },
+    ],
+  },
+  {
+    id: "required-load",
+    section: "Sustainable load",
+    prompt:
+      "Ignore the brand names. Which set of required work are you most willing to sustain for the next two to three years?",
+    choices: [
+      {
+        id: "a",
+        label:
+          "Discrete math, computer systems, advanced programming, operating systems, algorithms, plus machine learning",
+        scores: { cs: 4, ds: 1, sta: 0 },
+      },
+      {
+        id: "b",
+        label:
+          "Data structures, machine learning, optimization, stochastic simulation, probability II, stochastic processes",
+        scores: { cs: 1, ds: 4, sta: 1 },
+      },
+      {
+        id: "c",
+        label:
+          "Mathematical analysis, optimization, probability II, statistical computing, statistical inference, statistical learning",
+        scores: { cs: 0, ds: 2, sta: 4 },
+      },
+    ],
+  },
+  {
+    id: "later-year-difficulty",
+    section: "Sustainable load",
+    prompt: "In a typical later-year week, which difficulty would you rather live with?",
+    choices: [
+      {
+        id: "a",
+        label: "A system that will not run, or a bug that only appears at scale",
+        scores: { cs: 4, ds: 1, sta: 0 },
+      },
+      {
+        id: "b",
+        label: "A model that looks good in training but fails on new or messy data",
+        scores: { cs: 1, ds: 4, sta: 1 },
+      },
+      {
+        id: "c",
+        label:
+          "A result that is statistically delicate: assumptions, identification, and “how sure are we?”",
         scores: { cs: 0, ds: 2, sta: 4 },
       },
     ],

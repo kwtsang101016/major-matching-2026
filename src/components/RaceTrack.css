@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  font-family: "IBM Plex Mono", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
   font-weight: 700;
 }
@@ -63,7 +63,7 @@
 }
 
 .race__score {
-  font-family: "IBM Plex Mono", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-weight: 700;
   font-size: 18px;
   text-align: right;
