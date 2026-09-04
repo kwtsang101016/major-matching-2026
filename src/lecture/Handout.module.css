@@ -1,0 +1,109 @@
+.slides {
+  width: 100%;
+  background: #fff4d2;
+}
+
+.slidePage {
+  break-after: page;
+  page-break-after: always;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  min-height: 680px;
+  padding-bottom: 12px;
+  background: #fff4d2;
+}
+
+.slidePage:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+
+.slidePageLong {
+  break-inside: auto;
+  page-break-inside: auto;
+  min-height: 0;
+}
+
+.slideHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 24px;
+  color: #fff4d2;
+  background: #16213c;
+  border-top: 4px solid #f5cf6b;
+  font: 800 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.slides :global(.scene) {
+  min-height: 0 !important;
+  padding: 28px 32px 24px !important;
+}
+
+.slides :global(.scene h1),
+.slides :global(.coverTitle) {
+  font-size: clamp(28px, 4vw, 44px) !important;
+}
+
+.slides :global(.lead) {
+  margin-top: 14px !important;
+  font-size: 16px !important;
+}
+
+.slides :global(.cover) {
+  min-height: 620px !important;
+}
+
+.slides :global(.coverInner) {
+  padding: 48px 28px !important;
+}
+
+.slides :global(.choices) {
+  gap: 10px !important;
+}
+
+.slides :global(.choice) {
+  min-height: 64px !important;
+  padding: 14px 16px !important;
+  cursor: default !important;
+  box-shadow: 4px 4px 0 #16213c !important;
+}
+
+.slides :global(.three) {
+  gap: 16px !important;
+}
+
+.slides :global(.card h1) {
+  font-size: 32px !important;
+}
+
+.slides :global(table) {
+  font-size: 13px;
+}
+
+.slides :global(.printBlock) {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: #fffaf0;
+  border: 3px solid #16213c;
+}
+
+.slides :global(.printBlock p) {
+  margin: 0 0 8px;
+  font: 800 12px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.slides :global(.printBlock ol) {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.slides :global(.printBlock li) {
+  margin: 4px 0;
+  font-size: 13px;
+  line-height: 1.4;
+}

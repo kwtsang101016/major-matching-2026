@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { SceneFrame } from "./sceneFrame";
+import { LiveOnly } from "./printContext";
 import styles from "./Lecture.module.css";
 
 export function CoverScene(): ReactElement {
@@ -19,7 +20,9 @@ export function CoverScene(): ReactElement {
           <span className={styles.pill}>Computing</span>
           <span className={styles.pill}>Real-world decisions</span>
         </div>
-        <p className={styles.hint}>Use ← → or the buttons above.</p>
+        <LiveOnly>
+          <p className={styles.hint}>Use ← → or the buttons above.</p>
+        </LiveOnly>
       </div>
     </section>
   );

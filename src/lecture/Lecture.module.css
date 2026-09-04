@@ -66,6 +66,52 @@
   background: var(--cream);
 }
 
+.downloadBtn {
+  min-height: 42px;
+  padding: 0 14px;
+  color: var(--white);
+  background: var(--red);
+  border: 3px solid var(--paper);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
+  font: 800 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  cursor: pointer;
+}
+
+.downloadBtn:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+}
+
+.downloadBtn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.handoutMount {
+  position: fixed;
+  left: -200vw;
+  top: 0;
+  width: 1120px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.handoutToast {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 30;
+  max-width: 320px;
+  margin: 0;
+  padding: 12px 16px;
+  color: var(--cream);
+  background: var(--ink);
+  border: 3px solid var(--paper);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.35);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .navBtn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
@@ -689,4 +735,29 @@
   .coverInner {
     padding: 36px 18px;
   }
+}
+
+.printBlock {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--white);
+  border: 3px solid var(--ink);
+}
+
+.printPrompt {
+  margin: 0 0 8px;
+  font: 800 13px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.printChoices {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.printChoices li {
+  margin: 4px 0;
+  font-size: 14px;
+  line-height: 1.4;
 }

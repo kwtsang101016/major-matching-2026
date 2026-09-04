@@ -11,6 +11,7 @@ import {
 import { RaceTrack } from "../components/RaceTrack";
 import { Robot } from "../components/Robot";
 import { useDeck } from "./deckContext";
+import { LiveOnly, usePrintMode } from "./printContext";
 import { SceneFrame } from "./sceneFrame";
 import styles from "./Lecture.module.css";
 
@@ -114,7 +115,29 @@ export function QuizIntroScene(): ReactElement {
   );
 }
 
-export function QuizScene(): ReactElement {
+function QuizPrintScene(): ReactElement {
+  return (
+    <SceneFrame kicker="Know yourself" title="Self-check questions">
+      <p className={styles.lead}>
+        Use the live lecture to answer these. Circle the option that is closest to you.
+      </p>
+      {QUESTIONS.map((question, questionIndex) => (
+        <article key={question.id} className={styles.printBlock}>
+          <p className={styles.printPrompt}>
+            {String(questionIndex + 1).padStart(2, "0")}. {question.section} · {question.prompt}
+          </p>
+          <ol className={styles.printChoices} type="A">
+            {question.choices.map((choice) => (
+              <li key={choice.id}>{choice.label}</li>
+            ))}
+          </ol>
+        </article>
+      ))}
+    </SceneFrame>
+  );
+}
+
+function QuizLiveScene(): ReactElement {
   const { qIndex, setQIndex, answers, answer, scores } = useDeck();
   const question = QUESTIONS[qIndex];
   const progress = ((qIndex + 1) / QUESTIONS.length) * 100;
@@ -165,7 +188,26 @@ export function QuizScene(): ReactElement {
   );
 }
 
-export function ResultScene(): ReactElement {
+export function QuizScene(): ReactElement {
+  return usePrintMode() ? <QuizPrintScene /> : <QuizLiveScene />;
+}
+
+function ResultPrintScene(): ReactElement {
+  return (
+    <SceneFrame kicker="A reflection" title="Your answers are personal">
+      <p className={styles.lead}>
+        Complete the self-check in the live lecture. It turns your interest, Year‑1 experience, and
+        preferred course load into a reflection — then compare the required-course lists.
+      </p>
+      <p className={styles.note}>
+        The reflection is a guide for thinking, not an admission decision. Quotas and university
+        rules still apply.
+      </p>
+    </SceneFrame>
+  );
+}
+
+function ResultLiveScene(): ReactElement {
   const { fit, scores, restartQuiz } = useDeck();
 
   return (
@@ -180,13 +222,19 @@ export function ResultScene(): ReactElement {
         This is a self-understanding check — not an admission decision. Quotas and university rules
         still apply.
       </p>
-      <div className={styles.actions}>
-        <button type="button" className={styles.navBtn} onClick={restartQuiz}>
-          RETAKE SELF-CHECK
-        </button>
-      </div>
+      <LiveOnly>
+        <div className={styles.actions}>
+          <button type="button" className={styles.navBtn} onClick={restartQuiz}>
+            RETAKE SELF-CHECK
+          </button>
+        </div>
+      </LiveOnly>
     </SceneFrame>
   );
+}
+
+export function ResultScene(): ReactElement {
+  return usePrintMode() ? <ResultPrintScene /> : <ResultLiveScene />;
 }
 
 export function RequiredScene(): ReactElement {
@@ -291,14 +339,16 @@ export function SummaryScene(): ReactElement {
         have enjoyed, how programming and mathematics have felt — then compare required courses.{" "}
         <strong>Study well beats choosing a hot label.</strong>
       </p>
-      <div className={styles.actions}>
-        <button type="button" className={styles.navBtn} onClick={restartQuiz}>
-          RUN THE SELF-CHECK AGAIN
-        </button>
-        <button type="button" className={styles.primary} onClick={() => goTo("cover")}>
-          BACK TO START
-        </button>
-      </div>
+      <LiveOnly>
+        <div className={styles.actions}>
+          <button type="button" className={styles.navBtn} onClick={restartQuiz}>
+            RUN THE SELF-CHECK AGAIN
+          </button>
+          <button type="button" className={styles.primary} onClick={() => goTo("cover")}>
+            BACK TO START
+          </button>
+        </div>
+      </LiveOnly>
     </SceneFrame>
   );
 }
